@@ -1,0 +1,84 @@
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/restu_uas"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  Admin
+  Customer
+}
+
+enum OrderStatus {
+  Waiting_Confirmation
+  In_Progress
+  Not_Returned
+  Completed
+}
+
+enum OrderMethod {
+  COD
+  Pick_Up
+}
+
+model User {
+  id               Int            @id @default(autoincrement())
+  role             Role           @default(Customer)
+  phoneNumber      String         @unique
+  fullName         String
+  password         String
+  registrationDate DateTime       @default(now())
+  carts            Cart[]         @relation("UserCart")
+  orders           Order[]        @relation("UserOrder")
+}
+
+model ProductCategory {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  products    Product[] @relation("CategoryProducts")
+}
+
+model Product {
+  id               Int             @id @default(autoincrement())
+  icon             String?
+  name             String
+  description      String?
+  price            Float           @default(0)
+  stock            Int             @default(0)
+  registrationDate DateTime?       @default(now())
+  categoryId       Int
+  category         ProductCategory @relation("CategoryProducts", fields: [categoryId], references: [id])
+  carts            Cart[]          @relation("CartProducts")
+  orders           Order[]         @relation("OrderProducts")
+}
+
+model Cart {
+  id        Int     @id @default(autoincrement())
+  quantity  Int     @default(1)
+  duration  Int     @default(1)
+  productId Int
+  userId    Int
+  product   Product @relation("CartProducts", fields: [productId], references: [id])
+  user      User    @relation("UserCart", fields: [userId], references: [id])
+
+  @@unique([productId, userId])
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  quantity    Int         @default(1)
+  duration    Int         @default(1)
+  price       Float       @default(0)
+  method      OrderMethod @default(Pick_Up)
+  codLocation String?
+  status      OrderStatus @default(Waiting_Confirmation)
+  startAt     DateTime    @default(now())
+  productId   Int
+  userId      Int
+  product     Product     @relation("OrderProducts", fields: [productId], references: [id])
+  user        User        @relation("UserOrder", fields: [userId], references: [id])
+}
