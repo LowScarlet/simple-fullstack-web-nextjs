@@ -44,12 +44,26 @@ export default function Auth() {
 
   return (
     <div className="flex flex-col justify-center items-center px-4 min-h-svh">
-      <h1 className="font-bold text-2xl">Masuk</h1>
+      <h1 className="font-bold text-2xl">Daftar</h1>
       <p className="text-center text-sm">
-        Silahkan Masukan Kredentials Yang Valid Untuk Melanjutkan!
+        Selamat Datang, Silahkan Mengisi Form Berikut Untuk Mendaftar!
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-12 w-full">
+        <label className="form-control">
+          <div className="label">
+            <span className="label-text">Nama Lengkap</span>
+          </div>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Rio Andre"
+            className="input-bordered w-full input"
+            value={formData.fullName}
+            onChange={handleInputChange}
+            autoComplete="off"
+          />
+        </label>
         <label className="form-control">
           <div className="label">
             <span className="label-text">Nomor Telepon</span>
@@ -61,6 +75,7 @@ export default function Auth() {
             className="input-bordered w-full input"
             value={formData.phoneNumber}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         </label>
         <label className="form-control">
@@ -74,17 +89,18 @@ export default function Auth() {
             className="input-bordered w-full input"
             value={formData.password}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         </label>
         <button
           type="submit"
           className={`mt-4 w-full btn btn-neutral ${signinLoading ? "loading" : ""}`}
         >
-          {signinLoading ? "Memuat..." : "Masuk"}
+          {signinLoading ? "Memuat..." : "Daftar"}
         </button>
       </form>
-      <Link href={"/auth/register"} className="mt-4 w-full btn">
-        Daftar
+      <Link href="/auth/login" className="mt-4 w-full btn">
+        Masuk
       </Link>
     </div>
   );

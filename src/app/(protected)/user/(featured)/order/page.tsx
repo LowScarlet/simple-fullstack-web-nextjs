@@ -12,7 +12,7 @@ import { mutate } from "swr";
 
 export default function Order() {
   const [filter, setFilter] = useState<string>('all');
-  
+
   const userId = localStorage.getItem('id');
 
   const {
@@ -68,9 +68,15 @@ export default function Order() {
                   </div>
                 </div>
                 <div>
-                  <button onClick={() => deleteItem(item.id)} className="text-xl btn btn-circle btn-ghost btn-sm">
-                    <MdDelete />
-                  </button>
+                  {
+                    item.status == 'Completed' || item.status == 'Waiting_Confirmation' ?
+                      <button onClick={() => {
+                        deleteItem(item.id)
+                      }} className="text-xl btn btn-circle btn-ghost btn-sm">
+                        <MdDelete />
+                      </button>
+                      : null
+                  }
                 </div>
               </div>
             </div>

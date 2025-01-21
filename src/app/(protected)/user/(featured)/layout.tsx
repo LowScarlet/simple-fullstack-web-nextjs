@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuth } from "@/context/AuthContext";
 import { usePathname, useRouter } from "next/navigation";
 import { AiOutlineProduct } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
@@ -12,6 +13,10 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const pathname = usePathname()
+
+  const {
+    user: authUser,
+  } = useAuth();
 
   return (
     <>
@@ -31,6 +36,17 @@ export default function RootLayout({
           <TbTruckDelivery />
           <span className="btm-nav-label">Pesanan</span>
         </button>
+        {
+          authUser && authUser.role === 'Admin' && (
+            <button
+              className={pathname === "/admin/" ? "active" : ""}
+              onClick={() => router.push("/admin/")}
+            >
+              <TbTruckDelivery />
+              <span className="btm-nav-label">Admin</span>
+            </button>
+          )
+        }
         <button
           onClick={() => {
             localStorage.removeItem('id');
