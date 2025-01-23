@@ -67,7 +67,7 @@ export default function Product_Detail({ params }: { params: Promise<{ productId
           <Image
             width={1000}
             height={225}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+            src={dataProduct.icon || "/images/unknown4x4.png"}
             className="w-full"
             alt={"Image"}
           />

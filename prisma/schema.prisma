@@ -50,8 +50,8 @@ model Product {
   price            Float           @default(0)
   stock            Int             @default(0)
   registrationDate DateTime?       @default(now())
-  categoryId       Int
-  category         ProductCategory @relation("CategoryProducts", fields: [categoryId], references: [id])
+  categoryId       Int?
+  category         ProductCategory? @relation("CategoryProducts", fields: [categoryId], references: [id])
   carts            Cart[]          @relation("CartProducts")
   orders           Order[]         @relation("OrderProducts")
 }
@@ -62,8 +62,8 @@ model Cart {
   duration  Int     @default(1)
   productId Int
   userId    Int
-  product   Product @relation("CartProducts", fields: [productId], references: [id])
-  user      User    @relation("UserCart", fields: [userId], references: [id])
+  product   Product @relation("CartProducts", fields: [productId], references: [id], onDelete: Cascade)
+  user      User    @relation("UserCart", fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([productId, userId])
 }
@@ -79,6 +79,6 @@ model Order {
   startAt     DateTime    @default(now())
   productId   Int
   userId      Int
-  product     Product     @relation("OrderProducts", fields: [productId], references: [id])
-  user        User        @relation("UserOrder", fields: [userId], references: [id])
+  product     Product     @relation("OrderProducts", fields: [productId], references: [id], onDelete: Cascade)
+  user        User        @relation("UserOrder", fields: [userId], references: [id], onDelete: Cascade)
 }

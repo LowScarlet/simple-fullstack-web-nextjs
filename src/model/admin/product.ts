@@ -2,22 +2,10 @@
 
 import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
-import { CategoryInterface } from "./category";
-
-export interface ProductInterface {
-  id: number;
-  icon: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  registrationDate: string;
-  categoryId: number;
-  category: CategoryInterface
-}
+import { ProductInterface } from "../product";
 
 export const useProduct = () => {
-  const { data, error, isLoading } = useSWR<ProductInterface[]>('/api/client/admin/product/all', fetcher);
+  const { data, error, isLoading } = useSWR<ProductInterface[]>('/api/admin/product/', fetcher);
 
   return {
     data,
@@ -27,7 +15,7 @@ export const useProduct = () => {
 };
 
 export const useProductDetail = (id: number) => {
-  const { data, error, isLoading } = useSWR<ProductInterface>('/api/client/admin/product/detail/' + `${id}`, fetcher);
+  const { data, error, isLoading } = useSWR<ProductInterface>('/api/admin/product/' + `${id}`, fetcher);
 
   return {
     data,

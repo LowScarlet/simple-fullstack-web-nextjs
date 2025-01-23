@@ -51,7 +51,7 @@ export default function Order() {
               <div className="flex-none">
                 <div className="avatar">
                   <div className="rounded w-12">
-                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    <img src={item.product.icon || "/images/unknown4x4.png"} />
                   </div>
                 </div>
               </div>

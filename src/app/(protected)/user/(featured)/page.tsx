@@ -32,7 +32,8 @@ const Products = ({ dataProduct, isLoading }: { dataProduct?: ProductInterface[]
               <Image
                 width={500}
                 height={300}
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                src={item.icon || "/images/unknown4x4.png"}
+                className="w-full h-24 object-cover"
                 alt="Shoes" />
             </figure>
             <div className="p-2">
@@ -91,8 +92,8 @@ export default function Home() {
       <Image
         width={1000}
         height={225}
-        src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-        className="shadow-md rounded-md w-full"
+        src="https://www.wallpaperflare.com/static/567/415/630/nature-photography-landscape-hiking-wallpaper-preview.jpg"
+        className="shadow-md rounded-md w-full h-20 object-cover"
         alt={"Image"}
       />
     </div>

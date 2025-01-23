@@ -119,7 +119,7 @@ export default function Cart() {
                     <div className="avatar">
                       <div className="rounded w-12">
                         <Image 
-                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                          src={item.product.icon || "/images/unknown4x4.png"}
                           alt="Product image"
                           width={48}
                           height={48}
