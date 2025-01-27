@@ -58,6 +58,7 @@ export async function PATCH(req: NextRequest) {
         id: body.id
       },
       data: {
+        icon: body.icon,
         name: body.name,
         description: body.description,
         price: body.price,
