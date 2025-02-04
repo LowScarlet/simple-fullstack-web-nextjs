@@ -7,6 +7,7 @@ export async function POST(
   { params }: { params: Promise<{ userId: string, orderType: string }> | { userId: string, orderType: string } }
 ) {
   try {
+    const body = await req.json()
     const resolvedParams = await Promise.resolve(params);
     const userId = resolvedParams.userId;
     const orderType = resolvedParams.orderType;
@@ -26,6 +27,7 @@ export async function POST(
         duration: cart.duration,
         price: cart.product.price * cart.quantity * cart.duration,
         method: orderType === 'pickup' ? OrderMethod.Pick_Up : OrderMethod.COD,
+        codLocation: body.codLocation,
         productId: cart.productId,
         userId: parseInt(userId, 10),
       }))

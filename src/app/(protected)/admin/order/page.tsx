@@ -80,9 +80,12 @@ export default function Home() {
                   <div className="grow">
                     <h2 className="text-sm">{order.product.name}</h2>
                     <h1 className="font-bold text-sm">Rp {order.price.toLocaleString()},00</h1>
-                    <p className="text-xs">
+                    <p className="mb-8 text-xs">
                       {order.quantity}x Barang Selama {order.duration} Hari
                     </p>
+                    {
+                      order.codLocation && <p className="text-xs">Lokasi: {order.codLocation}</p>
+                    }
                     <div className="flex justify-between items-end mt-4">
                       <button
                         className="btn btn-neutral btn-xs"
